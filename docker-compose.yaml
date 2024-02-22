@@ -12,6 +12,11 @@ services:
       - db_products
     env_file:
       - .env
+    environment:
+      VIRTUAL_HOST: codifin-challenge.mi-escaparate.com
+      VIRTUAL_PORT: 8080
+      LETSENCRYPT_HOST: codifin-challenge.mi-escaparate.com
+      LETSENCRYPT_EMAIL: alfred.7790@gmail.com
     networks:
       dockernet:
         aliases:
