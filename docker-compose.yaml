@@ -7,7 +7,7 @@ services:
     image: go_codifin_img:latest
     container_name: go_codifin
     ports:
-      - "1313:8080"
+      - "1315:8080"
     depends_on:
       - db_products
     env_file:

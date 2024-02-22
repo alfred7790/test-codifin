@@ -39,9 +39,9 @@ $ make deploy-local
 ```
 6. If everything is ok, you should see something like this:
 ```shell
-[GIN-debug] Listening and serving HTTP on :1313
+[GIN-debug] Listening and serving HTTP on :1315
 ```
-7. Go to [swagger docs](http:localhost:1313/v1/swagger/index.html) and have fun.
+7. Go to [swagger docs](http:localhost:1315/v1/swagger/index.html) and have fun.
 
 # Manual start - Running Binary (optional)
 1. Clone the repo:
@@ -74,9 +74,9 @@ $ ./build/bin/go_codifin
 ```
 8. If everything is ok, you should see something like this:
 ```shell
-[GIN-debug] Listening and serving HTTP on :1313
+[GIN-debug] Listening and serving HTTP on :1315
 ```
-9. Go to [swagger docs](http:localhost:1313/v1/swagger/index.html) and have fun.
+9. Go to [swagger docs](http:localhost:1315/v1/swagger/index.html) and have fun.
 
 # Custom Config
 > If you need to change the default values of the configuration.
@@ -89,7 +89,7 @@ $ cd test-codifin
 > WARNING! Make sure that if you edit the values about the `DB service`, also you should modify the `docker-compose.yml` file.
 
 3. Restart the service `using Makefile` or `running Binary`.
-4. Go to [swagger docs](http:localhost:1313/v1/swagger/index.html) and have fun.
+4. Go to [swagger docs](http:localhost:1315/v1/swagger/index.html) and have fun.
 
 # Dependencies
 > Make sure that your GOPATH is exported.
