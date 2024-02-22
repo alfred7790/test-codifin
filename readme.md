@@ -46,6 +46,16 @@ $ make deploy-local
 ```
 7. Go to [swagger docs](http:localhost:1315/v1/swagger/index.html) and have fun.
 
+# Testing
+- Using `Makefile`.
+```shell
+$ make test
+```
+- Or try this:
+```shell
+$ go test ./...
+```
+
 # Manual start - Running Binary (optional)
 1. Clone the repo:
 ```shell

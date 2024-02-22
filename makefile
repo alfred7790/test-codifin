@@ -17,6 +17,11 @@ build:
 	@echo "Building binary"
 	go build -o build/bin/$(APP_NAME) cmd/codifin/main.go
 
+.PHONY: test
+test:
+	@echo "Running tests"
+	go test $(PKG_LIST)
+
 .PHONY: run
 run: build
 	./build/bin/$(APP_NAME)

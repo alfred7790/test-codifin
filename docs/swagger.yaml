@@ -1,0 +1,401 @@
+basePath: /v1
+definitions:
+  dto.ItemCartDTO:
+    properties:
+      count:
+        type: integer
+      product:
+        $ref: '#/definitions/dto.ProductDTO'
+      productID:
+        type: integer
+    type: object
+  dto.ItemData:
+    properties:
+      count:
+        type: integer
+      productID:
+        type: integer
+    type: object
+  dto.ProductDTO:
+    properties:
+      code:
+        type: string
+      id:
+        type: integer
+      imageURL:
+        type: string
+      name:
+        type: string
+      price:
+        type: number
+    type: object
+  dto.ProductData:
+    properties:
+      code:
+        type: string
+      imageURL:
+        type: string
+      name:
+        type: string
+      price:
+        type: number
+    type: object
+  dto.ProductsListResp:
+    properties:
+      products:
+        items:
+          $ref: '#/definitions/dto.ProductDTO'
+        type: array
+      total:
+        type: integer
+    type: object
+  dto.ShoppingCartDTO:
+    properties:
+      id:
+        type: integer
+      items:
+        items:
+          $ref: '#/definitions/dto.ItemCartDTO'
+        type: array
+    type: object
+  responses.ErrorDTO:
+    properties:
+      errorMessage:
+        type: string
+      message:
+        type: string
+    type: object
+  responses.SuccessDTO:
+    properties:
+      message: {}
+    type: object
+info:
+  contact:
+    email: alfred.7790@gmail.com
+    name: API Support
+  description: Service to manage products
+  title: Codifin Challenge API
+  version: "1.0"
+paths:
+  /cart/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves a shopping cart by its ID
+      operationId: find-shopping-cart
+      parameters:
+      - description: Shopping cart ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Found shopping cart
+          schema:
+            $ref: '#/definitions/dto.ShoppingCartDTO'
+        "400":
+          description: Invalid shopping cart ID
+          schema:
+            $ref: '#/definitions/responses.ErrorDTO'
+        "500":
+          description: Failed to retrieve shopping cart
+          schema:
+            $ref: '#/definitions/responses.ErrorDTO'
+      summary: Get a shopping cart by ID
+      tags:
+      - Shopping Carts
+  /cart/{id}/items:
+    delete:
+      consumes:
+      - application/json
+      description: Removes the specified items from the shopping cart
+      operationId: remove-items
+      parameters:
+      - description: Shopping cart ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: IDs of the products to remove
+        in: body
+        name: productIds
+        required: true
+        schema:
+          items:
+            type: integer
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Updated shopping cart
+          schema:
+            $ref: '#/definitions/dto.ShoppingCartDTO'
+        "400":
+          description: Invalid shopping cart ID or item IDs
+          schema:
+            $ref: '#/definitions/responses.ErrorDTO'
+        "500":
+          description: Failed to remove items from shopping cart
+          schema:
+            $ref: '#/definitions/responses.ErrorDTO'
+      summary: Remove items from a shopping cart
+      tags:
+      - Shopping Carts
+    post:
+      consumes:
+      - application/json
+      description: Adds an item to the specified shopping cart
+      operationId: add-item
+      parameters:
+      - description: Shopping cart ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Item data
+        in: body
+        name: item
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ItemData'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Updated shopping cart
+          schema:
+            $ref: '#/definitions/dto.ShoppingCartDTO'
+        "400":
+          description: Invalid shopping cart ID or item data
+          schema:
+            $ref: '#/definitions/responses.ErrorDTO'
+        "500":
+          description: Failed to add item to shopping cart
+          schema:
+            $ref: '#/definitions/responses.ErrorDTO'
+      summary: Add an item to a shopping cart
+      tags:
+      - Shopping Carts
+  /carts:
+    post:
+      consumes:
+      - application/json
+      description: Creates a new shopping cart with the specified items
+      operationId: new-cart
+      parameters:
+      - description: Items to add to the shopping cart
+        in: body
+        name: items
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/dto.ItemData'
+          type: array
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created shopping cart
+          schema:
+            $ref: '#/definitions/dto.ShoppingCartDTO'
+        "400":
+          description: Invalid item data
+          schema:
+            $ref: '#/definitions/responses.ErrorDTO'
+        "500":
+          description: Failed to create shopping cart
+          schema:
+            $ref: '#/definitions/responses.ErrorDTO'
+      summary: Create a new shopping cart
+      tags:
+      - Shopping Carts
+  /product/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Deletes a product by its ID
+      operationId: remove-product
+      parameters:
+      - description: Product ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Product deleted successfully
+          schema:
+            $ref: '#/definitions/responses.SuccessDTO'
+        "400":
+          description: Invalid product ID
+          schema:
+            $ref: '#/definitions/responses.ErrorDTO'
+        "500":
+          description: Failed to delete product
+          schema:
+            $ref: '#/definitions/responses.ErrorDTO'
+      summary: Delete a product
+      tags:
+      - Products
+    get:
+      consumes:
+      - application/json
+      description: Retrieves a product by its ID
+      operationId: find-product
+      parameters:
+      - description: Product ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Product found
+          schema:
+            $ref: '#/definitions/dto.ProductDTO'
+        "400":
+          description: Invalid product ID
+          schema:
+            $ref: '#/definitions/responses.ErrorDTO'
+        "404":
+          description: Product does not exist
+          schema:
+            $ref: '#/definitions/responses.ErrorDTO'
+        "500":
+          description: Failed to retrieve product
+          schema:
+            $ref: '#/definitions/responses.ErrorDTO'
+      summary: Get a product by ID
+      tags:
+      - Products
+    patch:
+      consumes:
+      - application/json
+      description: Updates a product with the provided updates
+      operationId: update-product
+      parameters:
+      - description: Product ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Product updates
+        in: body
+        name: updates
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ProductData'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Product updated successfully
+          schema:
+            $ref: '#/definitions/responses.SuccessDTO'
+        "400":
+          description: Invalid product ID or updates
+          schema:
+            $ref: '#/definitions/responses.ErrorDTO'
+        "500":
+          description: Failed to update product
+          schema:
+            $ref: '#/definitions/responses.ErrorDTO'
+      summary: Update a product
+      tags:
+      - Products
+  /products:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves a paginated and filtered list of products based on search
+        criteria
+      operationId: find-products
+      parameters:
+      - description: Page number
+        in: query
+        minimum: 1
+        name: page
+        required: true
+        type: integer
+      - description: Page size
+        in: query
+        minimum: 1
+        name: pageSize
+        required: true
+        type: integer
+      - description: Search term to filter products by code or name
+        in: query
+        name: searchTerm
+        type: string
+      - description: Field to order results by. Can be 'name', 'price', or 'code'.
+          Default is 'price'.
+        in: query
+        name: orderBy
+        type: string
+      - description: Whether to order results in ascending or descending order. Default
+          is true.
+        in: query
+        name: ascending
+        type: boolean
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Paginated and filtered list of products
+          schema:
+            $ref: '#/definitions/dto.ProductsListResp'
+        "400":
+          description: Invalid page, pageSize, or search parameters
+          schema:
+            $ref: '#/definitions/responses.ErrorDTO'
+        "500":
+          description: Failed to retrieve products
+          schema:
+            $ref: '#/definitions/responses.ErrorDTO'
+      summary: Get a paginated and filtered list of products
+      tags:
+      - Products
+    post:
+      consumes:
+      - application/json
+      description: Creates a new product with the provided data
+      operationId: new-product
+      parameters:
+      - description: Product data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ProductData'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created product
+          schema:
+            $ref: '#/definitions/dto.ProductDTO'
+        "400":
+          description: Invalid product data
+          schema:
+            $ref: '#/definitions/responses.ErrorDTO'
+        "500":
+          description: Failed to create product
+          schema:
+            $ref: '#/definitions/responses.ErrorDTO'
+      summary: Create a new product
+      tags:
+      - Products
+produces:
+- application/json
+schemes:
+- http
+- https
+swagger: "2.0"
