@@ -1,20 +1,23 @@
 # Codifin-challenge
+This project has been deployed at [API server](https://codifin-challenge.mi-escaparate.com/v1/swagger/index.html) and will be available until March 1st of 2024.
+
 ```shell
 Autor: I.S.C. Edgar Alfred Rodriguez Robles
 E-mail: alfred.7790@gmail.com
 ```
-# Table of Contents
-[_TOC_]
-
 # Overview
 This project is an example of API REST.
 
-# Requirements
-To run this project it is necessary to have installed:
-- docker:latest
-- docker-compose:latest
-- go 1.20
-- swagger:latest
+## Dependencies
+
+- [github.com/gin-gonic/gin](https://github.com/gin-gonic/gin) v1.9.1
+- [github.com/go-gormigrate/gormigrate/v2](https://github.com/go-gormigrate/gormigrate/v2) v2.1.1
+- [github.com/jinzhu/configor](https://github.com/jinzhu/configor) v1.2.1
+- [github.com/swaggo/files](https://github.com/swaggo/files) v1.0.1
+- [github.com/swaggo/gin-swagger](https://github.com/swaggo/gin-swagger) v1.6.0
+- [github.com/swaggo/swag](https://github.com/swaggo/swag) v1.16.3
+- [gorm.io/driver/postgres](https://github.com/gorm.io/driver/postgres) v1.5.4
+- [gorm.io/gorm](https://github.com/gorm.io/gorm) v1.25.5
 
 # GOPATH is exported?
 Make sure that yout GOPATH is exported.
