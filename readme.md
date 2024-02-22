@@ -11,7 +11,6 @@ This project is an example of API REST.
 ## Dependencies
 
 - [github.com/gin-gonic/gin](https://github.com/gin-gonic/gin) v1.9.1
-- [github.com/go-gormigrate/gormigrate/v2](https://github.com/go-gormigrate/gormigrate/v2) v2.1.1
 - [github.com/jinzhu/configor](https://github.com/jinzhu/configor) v1.2.1
 - [github.com/swaggo/files](https://github.com/swaggo/files) v1.0.1
 - [github.com/swaggo/gin-swagger](https://github.com/swaggo/gin-swagger) v1.6.0
