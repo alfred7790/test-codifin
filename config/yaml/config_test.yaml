@@ -1,0 +1,11 @@
+host:
+  enviroment: "test"
+  port: "8080"
+db:
+  host: "db_products"
+  port: "5432"
+  user: "tester"
+  password: "superPassword"
+  name: "products"
+  retries: 5
+debugmode: true

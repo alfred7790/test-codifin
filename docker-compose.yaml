@@ -1,0 +1,39 @@
+# docker-compose.yaml
+version: '3.8'
+services:
+
+  go_codifin:
+    restart: always
+    image: go_codifin_img:latest
+    container_name: go_codifin
+    ports:
+      - "1313:8080"
+    depends_on:
+      - db_products
+    env_file:
+      - .env
+    networks:
+      dockernet:
+        aliases:
+          - go_codifin_net
+
+  db_products:
+    image: postgres:14.1-alpine
+    container_name: db_products
+    command: postgres -c 'max_connections=200'
+    environment:
+      POSTGRES_DB: products
+      POSTGRES_USER: tester
+      POSTGRES_PASSWORD: superPassword
+    volumes:
+      - ./db/postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      dockernet:
+        aliases:
+          - db_products_net
+
+networks:
+  dockernet:
+    external: true

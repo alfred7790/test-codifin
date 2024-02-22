@@ -1,0 +1,11 @@
+host:
+  enviroment: "develop"
+  port: "1313"
+db:
+  host: "localhost"
+  port: "5432"
+  user: "tester"
+  password: "superPassword"
+  name: "products"
+  retries: 5
+debugmode: true
