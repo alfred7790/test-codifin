@@ -48,6 +48,11 @@ clean:
 	@echo "Cleaning up complete"
 
 .PHONY: deploy
-deploy: | build db docker-run
+deploy: | dep docs build db docker-run
+	sleep 2
+	docker-compose ps
+
+.PHONY: deploy-local
+deploy-local: | dep docs db run
 	sleep 2
 	docker-compose ps
